@@ -13,8 +13,8 @@ class Mocker {
   }
 
   paths(obj, parent) {
-    return _.chain(obj)
-    .map((value, key) => {
+    const data = Object.entries(obj)
+    .map(([key, value]) => {
       let out;
 
       if (_.isPlainObject(value)) {
@@ -25,8 +25,8 @@ class Mocker {
 
       return out;
     })
-    .flatten()
-    .value();
+    
+    return [].concat.apply([], data);
   }
 
   _replace(obj, spec, replaced, path) {
